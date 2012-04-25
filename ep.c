@@ -61,3 +61,11 @@ void esubport_set(expansion_subport *subport, uint8_t v) {
 	}
 	eport_update(port);
 }
+
+void esubport_pin_create(expansion_pin *pin, expansion_subport *subport, int idx) {
+	if(idx >= subport->len) {
+		return;
+	}
+	pin->ep_ptr = subport->ep_ptr;
+	pin->idx = subport->start + idx;
+}

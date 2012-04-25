@@ -12,5 +12,6 @@ void epin_set(expansion_pin &pin);
 void epin_unset(expansion_pin &pin);
 void esubport_create(expansion_subport &subport, expansion_port &ep, uint8_t start, uint8_t len);
 void esubport_set(expansion_subport &subport, uint8_t v);
+void esubport_pin_create(expansion_pin &pin, expansion_subport &subport, int idx);
 
 #endif // EXPANSION_PORT_H
