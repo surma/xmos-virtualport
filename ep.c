@@ -1,14 +1,18 @@
 #include <stdint.h>
 #include "types.h"
 #include "internal_c.h"
+#include "../lock/lock.h"
 
 void eport_update(expansion_port *ep) {
+	ClaimLock(ep->lock);
 	update(ep->buffer, ep->strobe, ep->clk, ep->data, ep->type);
+	FreeLock(ep->lock);
 }
 
 void eport_create_shift(expansion_port *port, unsigned int s, unsigned int c, unsigned int d) {
 	int i;
 	port->type = SHIFT;
+	port->lock = GetLock();
 	port->strobe = s;
 	port->clk = c;
 	port->data = d;
@@ -21,6 +25,7 @@ void eport_create_shift(expansion_port *port, unsigned int s, unsigned int c, un
 void eport_create_port(expansion_port *port, unsigned int s) {
 	int i;
 	port->type = PORT;
+	port->lock = GetLock();
 	port->strobe = s;
 	for(i = 0; i < MAX_NUM_CHIPS; i++) {
 		port->buffer[i] = 0;

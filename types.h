@@ -1,6 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 #include <stdint.h>
+#include "../lock/lock.h"
 
 #define MAX_NUM_CHIPS 1
 
@@ -13,6 +14,7 @@ typedef struct {
 	unsigned int strobe;
 	unsigned int clk;
 	unsigned int data;
+	lock lock;
 	uint8_t buffer[MAX_NUM_CHIPS];
 	eport_type_t type;
 } expansion_port;
