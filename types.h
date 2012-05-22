@@ -4,11 +4,17 @@
 
 #define MAX_NUM_CHIPS 1
 
+typedef enum {
+	SHIFT,
+	PORT
+} eport_type_t;
+
 typedef struct {
 	unsigned int strobe;
 	unsigned int clk;
 	unsigned int data;
 	uint8_t buffer[MAX_NUM_CHIPS];
+	eport_type_t type;
 } expansion_port;
 
 typedef struct {

@@ -3,7 +3,8 @@
 
 #include "types.h"
 
-void eport_create(expansion_port& ep, out port s, out port c, out port d);
+void eport_create_shift(expansion_port& ep, out port s, out port c, out port d);
+void eport_create_port(expansion_port& ep, out port s);
 void eport_set_silent(expansion_port& ep, int idx, int state);
 void eport_set(expansion_port& ep, int idx, int state);
 void eport_update(expansion_port &ep);

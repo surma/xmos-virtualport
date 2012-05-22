@@ -3,14 +3,25 @@
 #include "internal_c.h"
 
 void eport_update(expansion_port *ep) {
-	update(ep->buffer, ep->strobe, ep->clk, ep->data);
+	update(ep->buffer, ep->strobe, ep->clk, ep->data, ep->type);
 }
 
-void eport_create(expansion_port *port, unsigned int s, unsigned int c, unsigned int d) {
+void eport_create_shift(expansion_port *port, unsigned int s, unsigned int c, unsigned int d) {
 	int i;
+	port->type = SHIFT;
 	port->strobe = s;
 	port->clk = c;
 	port->data = d;
+	for(i = 0; i < MAX_NUM_CHIPS; i++) {
+		port->buffer[i] = 0;
+	}
+	eport_update(port);
+}
+
+void eport_create_port(expansion_port *port, unsigned int s) {
+	int i;
+	port->type = PORT;
+	port->strobe = s;
 	for(i = 0; i < MAX_NUM_CHIPS; i++) {
 		port->buffer[i] = 0;
 	}
