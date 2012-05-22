@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include "../lock/lock.h"
 
-#define MAX_NUM_CHIPS 1
+#define MAX_NUM_CHIPS 4
 
 typedef enum {
 	SHIFT,
 	PORT
-} eport_type_t;
+} vport_type_t;
 
 typedef struct {
 	unsigned int strobe;
@@ -16,17 +16,17 @@ typedef struct {
 	unsigned int data;
 	lock lock;
 	uint8_t buffer[MAX_NUM_CHIPS];
-	eport_type_t type;
-} expansion_port;
+	vport_type_t type;
+} virtual_port;
 
 typedef struct {
 	int ep_ptr;
 	uint8_t idx;
-} expansion_pin;
+} virtual_pin;
 
 typedef struct {
 	int ep_ptr;
 	uint8_t start;
 	uint8_t len;
-} expansion_subport;
+} virtual_subport;
 #endif // TYPES_H

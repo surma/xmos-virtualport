@@ -2,9 +2,9 @@
 #include <platform.h>
 #include <stdint.h>
 #include "types.h"
-#include "../misc/wait.h"
+#include "wait/wait.h"
 
-void update(uint8_t buffer[], out port strobe, out port clk, out port data, eport_type_t type) {
+void update(uint8_t buffer[], out port strobe, out port clk, out port data, vport_type_t type) {
 	int i, d;
 	if(type == SHIFT) {
 		strobe <: 0;
@@ -23,6 +23,6 @@ void update(uint8_t buffer[], out port strobe, out port clk, out port data, epor
 		}
 		strobe <: 1;
 	} else if (type == PORT) {
-		strobe <: (uint8_t)buffer[0];
+		data <: (uint8_t)buffer[0];
 	}
 }
